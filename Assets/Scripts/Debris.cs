@@ -5,10 +5,10 @@ public class Debris : MonoBehaviour
 	#region Drift and Rotation
 
 	[Header("Drift and Rotation")]
-	[Range(0f, 2f)]
+	[Range(0f, 20f)]
 	public float DriftSpeedMin;
 
-	[Range(0f, 2f)]
+	[Range(0f, 20f)]
 	public float DriftSpeedMax;
 
 	private float DriftSpeed;
@@ -51,15 +51,18 @@ public class Debris : MonoBehaviour
 		transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
 	}
 
-	private void FixedUpdate() {
-		transform.Rotate(0, 0, RotationSpeed * Time.fixedDeltaTime);
-		Body.AddForce(DriftSpeed * Time.fixedDeltaTime * Vector2.up, ForceMode2D.Force);
+	private void Update() {
+		transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
+		Body.AddForce(DriftSpeed * Time.deltaTime * Vector2.up, ForceMode2D.Force);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.TryGetComponent<Player>(out var player)) {
-			player.Detach();
 
+			//Detach if it's the debris the player is grabbing onto.
+			if (player.Debris == gameObject) player.Detach();
+
+			//React based on the type of debris.
 			switch (Type) {
 				case DebrisType.Normal:
 					Debug.Log($"[Debris] Player passed through {name}.");
