@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxSpwner : MonoBehaviour
    {
-
-
-    //timing is awkward needs tweaking
-       
+      
     public Transform player;
     public GameObject[] asteroidPrefabs;
     public float spawnInterval = 2f;
