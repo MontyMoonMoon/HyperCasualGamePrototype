@@ -1,0 +1,80 @@
+using UnityEngine;
+
+public class Debris : MonoBehaviour
+{
+	#region Drift and Rotation
+
+	[Header("Drift and Rotation")]
+	[Range(0f, 2f)]
+	public float DriftSpeedMin;
+
+	[Range(0f, 2f)]
+	public float DriftSpeedMax;
+
+	private float DriftSpeed;
+
+	[Range(-60f, 60f)]
+	public float RotationSpeed;
+
+	#endregion
+
+	#region Debris
+
+	[Header("Debris")]
+	public DebrisType Type;
+
+	public enum DebrisType { Normal, Fragile, Hazard }
+
+	public Rigidbody2D Body;
+
+	#endregion
+
+	#region Collision Behavior
+
+	void Disintegrate(bool debug = false) {
+		//TODO: Crack into 3 pieces and floats away
+		Destroy(gameObject);
+	}
+
+	void Explode(Player player, bool debug = false) {
+		//TODO: Explode and kills the player
+		Destroy(gameObject);
+		//Player.Kill();
+	}
+
+	#endregion
+
+	#region Unity
+
+	private void Start() {
+        DriftSpeed = Random.Range(DriftSpeedMin, DriftSpeedMax);
+		transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+	}
+
+	private void FixedUpdate() {
+		transform.Rotate(0, 0, RotationSpeed * Time.fixedDeltaTime);
+		Body.AddForce(DriftSpeed * Time.fixedDeltaTime * Vector2.up, ForceMode2D.Force);
+	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.TryGetComponent<Player>(out var player)) {
+			player.Detach();
+
+			switch (Type) {
+				case DebrisType.Normal:
+					Debug.Log($"[Debris] Player passed through {name}.");
+					break;
+
+				case DebrisType.Fragile:
+					Disintegrate(true);
+					break;
+
+				case DebrisType.Hazard:
+					Explode(player, true);
+					break;
+			}
+		}
+	}
+
+	#endregion
+}

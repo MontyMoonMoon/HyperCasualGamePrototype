@@ -60,9 +60,9 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.42f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GrapplingHandler.cs" />
     <Compile Include="Assets\Scripts\BoxSpwner.cs" />
-    <Compile Include="Assets\Scripts\RotationHndler.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Debris.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
   </ItemGroup>
   <ItemGroup>
