@@ -50,7 +50,7 @@ MonoBehaviour:
   DriftSpeedMin: 0
   DriftSpeedMax: 0
   RotationSpeed: 5
-  Type: 0
+  Type: 1
   Body: {fileID: 7565581030285926637}
 --- !u!50 &7565581030285926637
 Rigidbody2D:
