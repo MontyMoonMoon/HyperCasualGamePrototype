@@ -1036,6 +1036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: 3518094748958402183, guid: 05f16afcdc26c8840b90e65ad6b6bca4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3571604906952658778, guid: 05f16afcdc26c8840b90e65ad6b6bca4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.74
