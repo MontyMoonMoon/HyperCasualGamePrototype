@@ -9,22 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6672588717851012547}
-<<<<<<<< HEAD:Assets/Prefabs/Debris Template.prefab
   - component: {fileID: -722119357974154595}
   - component: {fileID: 7565581030285926637}
-  - component: {fileID: 6470865259468337343}
-  - component: {fileID: 83862392335338729}
-  - component: {fileID: 6611865510619994600}
-  m_Layer: 6
-  m_Name: Debris Template
-========
-  - component: {fileID: 7565581030285926637}
-  - component: {fileID: -722119357974154595}
   - component: {fileID: 3823761245009917696}
   - component: {fileID: 8583019217326925212}
   m_Layer: 6
-  m_Name: BigAster
->>>>>>>> master:Assets/BigAster.prefab
+  m_Name: MidAster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,18 +29,12 @@ Transform:
   m_GameObject: {fileID: 6763253405267280926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<<< HEAD:Assets/Prefabs/Debris Template.prefab
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-========
-  m_LocalPosition: {x: -5.58, y: 0.06, z: 0.024414357}
-  m_LocalScale: {x: 3.324517, y: 3.324517, z: 3.324517}
->>>>>>>> master:Assets/BigAster.prefab
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<<< HEAD:Assets/Prefabs/Debris Template.prefab
 --- !u!114 &-722119357974154595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6763253405267280926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719d07dc17568e0478ba1cd064b74f45, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d778406044679144a9899bc19030921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DriftSpeedMin: 1
@@ -68,8 +52,6 @@ MonoBehaviour:
   RotationSpeed: 5
   Type: 0
   Body: {fileID: 7565581030285926637}
-========
->>>>>>>> master:Assets/BigAster.prefab
 --- !u!50 &7565581030285926637
 Rigidbody2D:
   serializedVersion: 4
@@ -97,24 +79,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<<< HEAD:Assets/Prefabs/Debris Template.prefab
---- !u!61 &6470865259468337343
-BoxCollider2D:
-========
---- !u!114 &-722119357974154595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6763253405267280926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719d07dc17568e0478ba1cd064b74f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  driftSpeed: 0.5
 --- !u!212 &3823761245009917696
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -156,7 +120,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -552105079, guid: b64b9fc43c7d74041899bf5090125fbc, type: 3}
+  m_Sprite: {fileID: -1878935752, guid: ab38de46dceb8304c9a942f4b99f041f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,7 +133,6 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!58 &8583019217326925212
 CircleCollider2D:
->>>>>>>> master:Assets/BigAster.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,78 +160,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-<<<<<<<< HEAD:Assets/Prefabs/Debris Template.prefab
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1.0000001}
-  m_EdgeRadius: 0
---- !u!33 &83862392335338729
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6763253405267280926}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6611865510619994600
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6763253405267280926}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
-========
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.32000002
->>>>>>>> master:Assets/BigAster.prefab
+  m_Radius: 0.16
