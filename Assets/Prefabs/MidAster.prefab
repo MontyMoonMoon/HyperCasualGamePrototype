@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d778406044679144a9899bc19030921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DriftSpeedMin: 1
-  DriftSpeedMax: 6
+  DriftSpeedMin: 0
+  DriftSpeedMax: 0
   RotationSpeed: 5
   Type: 0
   Body: {fileID: 7565581030285926637}
