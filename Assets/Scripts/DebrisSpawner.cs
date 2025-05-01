@@ -106,7 +106,7 @@ public class DebrisSpawner : MonoBehaviour {
 
 		if (distanceSinceLastSpawn > DistanceQuota) {
 			LastSpawn = playerX;
-			ScrollSpawn(true);
+			ScrollSpawn();
 		}
 
 		#endregion

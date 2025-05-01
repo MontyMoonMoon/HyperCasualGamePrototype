@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 	[Header("Game Objects & Components")]
     public Rigidbody2D Body;
 	public LayerMask DebrisLayer;
-	public GameObject Debris;
+	public GameObject Debris { get; private set; }
 
 	#endregion
 

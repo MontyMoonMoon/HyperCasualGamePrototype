@@ -2,6 +2,20 @@ using UnityEngine;
 
 public class Debris : MonoBehaviour
 {
+	#region Game Objects & Components
+
+	[Header("Game Objects & Components")]
+
+	public Rigidbody2D Body;
+
+	public DebrisType Type;
+
+	public enum DebrisType { Normal, Fragile, Hazard }
+
+	public GameManager Manager;
+
+	#endregion
+
 	#region Drift and Rotation
 
 	[Header("Drift and Rotation")]
@@ -18,17 +32,6 @@ public class Debris : MonoBehaviour
 
 	#endregion
 
-	#region Debris
-
-	[Header("Debris")]
-	public DebrisType Type;
-
-	public enum DebrisType { Normal, Fragile, Hazard }
-
-	public Rigidbody2D Body;
-
-	#endregion
-
 	#region Collision Behavior
 
 	void Disintegrate(bool debug = false) {
@@ -36,10 +39,9 @@ public class Debris : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	void Explode(Player player, bool debug = false) {
-		//TODO: Explode and kills the player
+	void Explode(bool debug = false) {
+		//TODO: Explode
 		Destroy(gameObject);
-		//Player.Kill();
 	}
 
 	#endregion
@@ -71,6 +73,7 @@ public class Debris : MonoBehaviour
 	private void Start() {
 		Spawner = GameObject.Find("Debris Spawner");
 		Script = Spawner.GetComponent<DebrisSpawner>();
+		Manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
 		DriftSpeed = Random.Range(DriftSpeedMin, DriftSpeedMax);
 		transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
@@ -93,14 +96,21 @@ public class Debris : MonoBehaviour
 			switch (Type) {
 				case DebrisType.Normal:
 					Debug.Log($"[Debris] Player passed through {name}.");
+
 					break;
 
 				case DebrisType.Fragile:
+					Manager.AddScore();
 					Disintegrate(true);
+
 					break;
 
 				case DebrisType.Hazard:
-					Explode(player, true);
+					if (Manager.Multiplier > 1) Manager.ResetMultiplier();
+					else player.Kill();
+
+					Explode(true);
+
 					break;
 			}
 		}
