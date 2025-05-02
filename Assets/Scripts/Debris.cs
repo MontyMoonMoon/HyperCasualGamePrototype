@@ -18,17 +18,49 @@ public class Debris : MonoBehaviour
 
 	#region Drift and Rotation
 
+
 	[Header("Drift and Rotation")]
-	[Range(0f, 20f)]
+	[Range(0f, 1f)]
+	public float DriftingChance = 0.1f;
+
+	private bool Drifting = false;
+
+	[Range(0f, 5f)]
 	public float DriftSpeedMin;
 
-	[Range(0f, 20f)]
+	[Range(0f, 5f)]
 	public float DriftSpeedMax;
+
+	public float TurnRange = 0.25f;
 
 	private float DriftSpeed;
 
+	public Vector2 PointA;
+
+	public Vector2 PointB;
+
+	private Vector2 Target;
+
 	[Range(-60f, 60f)]
 	public float RotationSpeed;
+
+	private void Drift() {
+		if (!Drifting || PointA == PointB) return;
+
+		Vector2 position = transform.position;
+		float distanceA = Vector2.Distance(position, PointA);
+		float distanceB = Vector2.Distance(position, PointB);
+		float travel = DriftSpeed * Time.deltaTime;
+
+		//If this is close to PointA, move towards PointB.
+		//Automatically engages on first frame.
+		if (distanceA < TurnRange && Target != PointB) Target = PointB;
+
+		//If this is close to PointB, move towards PointA.
+		else if (distanceB < TurnRange && Target != PointA) Target = PointA;
+
+		transform.position = Vector2.Lerp(position, Target, travel);
+	}
 
 	#endregion
 
@@ -75,13 +107,22 @@ public class Debris : MonoBehaviour
 		Script = Spawner.GetComponent<DebrisSpawner>();
 		Manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-		DriftSpeed = Random.Range(DriftSpeedMin, DriftSpeedMax);
+		//Difficulty-scaled drift chance
+		float t = Mathf.Clamp01((Manager.Difficulty - 1f) / (Manager.DifficultyCap - 1f));
+		DriftingChance = Mathf.Lerp(DriftingChance, 1f, t);
+		Drifting = Random.Range(0f, 1f) < DriftingChance;
+
+		//Difficulty-scaled drift speed
+		float driftSpeedNow = Mathf.Lerp(DriftSpeedMin, DriftSpeedMax, t);
+		DriftSpeed = Random.Range(driftSpeedNow, DriftSpeedMax);
+
 		transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
 	}
 
 	private void Update() {
 		transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
-		Body.AddForce(DriftSpeed * Time.deltaTime * Vector2.up, ForceMode2D.Force);
+
+		Drift();
 
 		CheckDespawn(true);
 	}
@@ -95,7 +136,7 @@ public class Debris : MonoBehaviour
 			//React based on the type of debris.
 			switch (Type) {
 				case DebrisType.Normal:
-					Debug.Log($"[Debris] Player passed through {name}.");
+					//Debug.Log($"[Debris] Player passed through {name}.");
 
 					break;
 
@@ -106,7 +147,9 @@ public class Debris : MonoBehaviour
 					break;
 
 				case DebrisType.Hazard:
-					if (Manager.Multiplier > 1) Manager.ResetMultiplier();
+					if (Manager.Multiplier >= Manager.MultiplierShield) 
+						Manager.ResetMultiplier();
+
 					else player.Kill();
 
 					Explode(true);
