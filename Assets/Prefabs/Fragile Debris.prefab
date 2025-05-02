@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8583019217326925212}
   - component: {fileID: 3823761245009917696}
   m_Layer: 6
-  m_Name: Debris
+  m_Name: Fragile Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,9 +50,13 @@ MonoBehaviour:
   Body: {fileID: 7565581030285926637}
   Type: 1
   Manager: {fileID: 0}
-  DriftSpeedMin: 0
-  DriftSpeedMax: 0
-  RotationSpeed: 15
+  DriftingChance: 0.1
+  DriftSpeedMin: 0.1
+  DriftSpeedMax: 0.5
+  TurnRange: 0.25
+  PointA: {x: 0, y: 0}
+  PointB: {x: 0, y: 0}
+  RotationSpeed: 35
 --- !u!50 &7565581030285926637
 Rigidbody2D:
   serializedVersion: 4

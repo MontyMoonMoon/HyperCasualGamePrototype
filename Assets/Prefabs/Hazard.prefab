@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5119344341669342184}
   - component: {fileID: 3990005199145688795}
   - component: {fileID: 9108829136664485504}
+  - component: {fileID: 1088115826070239588}
   m_Layer: 6
   m_Name: Near Miss Range
   m_TagString: Untagged
@@ -80,7 +81,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef209928bbac5d45bae7f20dfd0f134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Manager: {fileID: 0}
+--- !u!50 &1088115826070239588
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947878892991220391}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &7856863438008312473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,13 +128,25 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 551370341, guid: 179b3d5ac4dc21b4ca9537f0581fca83, type: 3}
+    - target: {fileID: 3823761245009917696, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7028302
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823761245009917696, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7028302
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823761245009917696, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6672588717851012547, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 14.74
       objectReference: {fileID: 0}
     - target: {fileID: 6672588717851012547, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.08
       objectReference: {fileID: 0}
     - target: {fileID: 6672588717851012547, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -143,7 +182,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6763253405267280926, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
       propertyPath: m_Name
-      value: Hazard Variant
+      value: Hazard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565581030285926637, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8583019217326925212, guid: ac489aa8f5bf14a43b4bce5d0bc2249f, type: 3}
       propertyPath: m_Radius
