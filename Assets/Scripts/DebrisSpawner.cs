@@ -4,7 +4,7 @@ public class DebrisSpawner : MonoBehaviour {
 
 	#region Game Objects & Components
 	[Header("Game Objects & Components")]
-	public GameObject DebrisPrefab;
+	public GameObject[] DebrisPrefabs;
 
 	public Transform[] SpawnPoints;
 
@@ -67,16 +67,26 @@ public class DebrisSpawner : MonoBehaviour {
 
 			usedSpawns[spawnIndex] = true;
 
-			GameObject newDebrisObj = Instantiate(DebrisPrefab, SpawnPoints[spawnIndex].position, Quaternion.identity, DebrisContainer);
+			GameObject newDebrisObj;
 
-			if (debug) Debug.Log("[DebrisSpawner] Spawned a new debris!");
+			//1: Spawn the default debris type (fragile).
+			if (i == 0) {
+				newDebrisObj = Instantiate(DebrisPrefabs[0], SpawnPoints[spawnIndex].position, Quaternion.identity, DebrisContainer);
+			}
+
+			//2+: Spawn a random debris type.
+			else {
+				int index = Random.Range(0, DebrisPrefabs.Length);
+
+				newDebrisObj = Instantiate(DebrisPrefabs[index], SpawnPoints[spawnIndex].position, Quaternion.identity, DebrisContainer);
+			}
 
 			Debris debris = newDebrisObj.GetComponent<Debris>();
 
-			//TODO: Modify debris variant here.
-			//TODO: Ensure that at least one safe variant is present at any given batch.
+			debris.PointA = SpawnPoints[spawnIndex].position;
+			debris.PointB = SpawnPoints[Random.Range(0, SpawnPoints.Length)].position;
 
-			if (debug) Debug.Log($"[DebrisSpawner] Set to [VARIANT]"); //TODO: Edit this.
+			if (debug) Debug.Log($"[DebrisSpawner] Spawned a {newDebrisObj.name}");
 		}
 
 		if (debug) Debug.Log($"[DebrisSpawner] Finished batch of {debrisCount} debris.");
@@ -87,6 +97,8 @@ public class DebrisSpawner : MonoBehaviour {
 	#region Unity
 
 	private void Update() {
+
+		if (Player == null) return;
 
 		#region Follow player movement
 
@@ -101,8 +113,6 @@ public class DebrisSpawner : MonoBehaviour {
 		float playerX = Player.transform.position.x;
 
 		float distanceSinceLastSpawn = playerX - LastSpawn;
-
-		//Debug.Log($"Distance: {distanceSinceLastSpawn:F2} / {DistanceQuota:F2}");
 
 		if (distanceSinceLastSpawn > DistanceQuota) {
 			LastSpawn = playerX;
