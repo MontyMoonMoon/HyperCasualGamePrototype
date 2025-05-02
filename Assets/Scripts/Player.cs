@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +9,10 @@ public class Player : MonoBehaviour
     public Rigidbody2D Body;
 	public LayerMask DebrisLayer;
 	public GameObject Debris { get; private set; }
+	public GameManager Manager;
+
+	public SpriteRenderer Sprite;
+	public Sprite[] Sprites;
 
 	#endregion
 
@@ -17,8 +22,13 @@ public class Player : MonoBehaviour
 	/// How fast the player moves towards the target.
 	/// </summary>
 	[Header("Grappling Settings")]
-	[Range(0, 1000)]
-	public float Speed = 550;
+	[Range(0, 5000)]
+	public float MinSpeed = 550;
+
+	[Range(0, 5000)]
+	public float MaxSpeed = 3000;
+
+	public float Speed = 0;
 
 	/// <summary>
 	/// The amount of time the player has to wait before grabbing again.
@@ -39,6 +49,8 @@ public class Player : MonoBehaviour
 	[Range(0f, 5f)]
 	public float DetachedDrag = 2f;
 
+	private float DragMultiplier = 1f;
+
 	#endregion
 
 	#region Gravity Gun Methods
@@ -53,7 +65,7 @@ public class Player : MonoBehaviour
 
 		//If clicked on a grab-able object...
 		if (hit != null) {
-			Body.drag = AttachedDrag;
+			Body.drag = AttachedDrag * DragMultiplier;
 
 			Debris = hit.gameObject;
 
@@ -77,7 +89,7 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public void Detach(bool debug = false) {
 		if (debug) Debug.Log($"[Player] Detaching from {Debris.name}.");
-		Body.drag = DetachedDrag;
+		Body.drag = DetachedDrag * DragMultiplier;
 		Debris = null;
 	}
 
@@ -99,6 +111,9 @@ public class Player : MonoBehaviour
 
 	#region Unity
 
+	private void Start() {
+	}
+
 	void Update() {
 		//Cooldown
 		if (CooldownRemaining > 0f) CooldownRemaining -= Time.deltaTime;
@@ -106,6 +121,18 @@ public class Player : MonoBehaviour
 
 		//On left-click...
 		if (Input.GetMouseButtonDown(0) && CooldownRemaining == 0) Attach(false);
+
+		//Difficulty-scaled Speed
+		float t = Mathf.Clamp01((Manager.Difficulty - 1f) / (Manager.DifficultyCap - 1f));
+		Speed = Mathf.Lerp(MinSpeed, MaxSpeed, t);
+
+		//Difficulty-scaled Drag
+		DragMultiplier = Mathf.Lerp(Manager.Difficulty, Manager.DifficultyCap, t);
+
+		//Update sprite based on heading
+		if (Body.velocity.normalized.y > 0.25) Sprite.sprite = Sprites[1];
+		else if (Body.velocity.normalized.y < -0.25) Sprite.sprite = Sprites[2];
+		else Sprite.sprite = Sprites[0];
 	}
 
 	private void FixedUpdate() {
